@@ -17,8 +17,9 @@ data class Reservations(
             acc + reservation.calculateDiscountedPrice(discountPolicies)
         }
 
-    fun display(): String = reservations.joinToString("\n") { it.display() }
-
+    fun forEachIndexed(action: (Int, Reservation) -> Unit) {
+        reservations.forEachIndexed(action)
+    }
 
     private fun validateNoOverlapping() {
         reservations.forEachIndexed { index, reservation ->

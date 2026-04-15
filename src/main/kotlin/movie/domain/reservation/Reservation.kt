@@ -3,6 +3,7 @@ package movie.domain.reservation
 import movie.domain.amount.Money
 import movie.domain.discount.DiscountPolicies
 import movie.domain.screening.Screening
+import movie.domain.screening.ScreeningDateTime
 import movie.domain.seat.SelectedSeats
 
 class Reservation(
@@ -16,8 +17,13 @@ class Reservation(
         screening.isTimeOverlapping(other)
 
     fun calculateDiscountedPrice(discountPolicies: DiscountPolicies): Money =
-        screening.calculateDiscountedPrice(selectedSeats, discountPolicies)
+        discountPolicies.applyDiscount(basePrice(), screeningDateTime())
 
-    fun display(): String =
-        "- [${screening.movie}] ${screening.slot.date} ${screening.slot.startTime}  좌석: ${selectedSeats.display()}"
+    fun getScreening(): Screening = screening
+
+    fun getSelectedSeats(): SelectedSeats = selectedSeats
+
+    private fun basePrice(): Money = selectedSeats.totalPrice
+
+    private fun screeningDateTime(): ScreeningDateTime = screening.screeningDateTime()
 }

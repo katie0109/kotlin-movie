@@ -50,12 +50,12 @@ class OutputView {
 
     fun printAddedToCart(reservation: Reservation) {
         println(ADDED_TO_CART_MESSAGE)
-        printReservationItem(reservation)
+        printReservationDetail(reservation)
     }
 
     fun printCart(reservations: Reservations) {
         println(CART_HEADER)
-        println(reservations.display())
+        printReservationList(reservations)
     }
 
     fun printFinalPrice(price: Money) {
@@ -70,7 +70,7 @@ class OutputView {
     ) {
         println(RESERVATION_COMPLETE_HEADER)
         println(RESERVATION_DETAIL_HEADER)
-        println(reservations.display())
+        printReservationList(reservations)
         println(
             PAYMENT_AMOUNT_FORMAT.format(
                 formatMoney(price),
@@ -90,8 +90,16 @@ class OutputView {
         println()
     }
 
-    private fun printReservationItem(reservation: Reservation) {
-        println(reservation.display())
+    private fun printReservationDetail(reservation: Reservation) {
+        val screening = reservation.getScreening()
+        val selectedSeats = reservation.getSelectedSeats()
+        println("- [${screening.movie}] ${screening.slot.date} ${screening.slot.startTime}  좌석: ${selectedSeats.display()}")
+    }
+
+    private fun printReservationList(reservations: Reservations) {
+        reservations.forEachIndexed { _, reservation ->
+            printReservationDetail(reservation)
+        }
     }
 
     private fun formatMoney(money: Money): String = String.format("%,d", money.value)

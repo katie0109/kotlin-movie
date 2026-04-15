@@ -162,6 +162,6 @@ class ScreeningTest {
 
         val reservation = updatedScreening.createReservation(selectedSeats)
         assertThat(reservation).isNotNull()
-        assertThat(reservation.display()).contains("좌석: A1")
+        assertThat(reservation.getSelectedSeats().display()).contains("A1")
     }
 }
