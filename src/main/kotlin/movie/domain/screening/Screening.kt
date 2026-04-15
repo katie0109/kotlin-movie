@@ -13,6 +13,13 @@ class Screening(
 ) {
     fun isTimeOverlapping(other: Screening): Boolean = slot.isOverlapping(other.slot)
 
+    fun reserve(positions: SeatPositions): Reservation {
+        val selectedSeats = toSelectedSeats(positions)
+        val availableSeats = isReserveAvailable(selectedSeats)
+        val reservedScreening = reserve(availableSeats)
+        return reservedScreening.createReservation(availableSeats)
+    }
+
     fun isReserveAvailable(selectedSeats: SelectedSeats): SelectedSeats {
         require(isValidSeats(selectedSeats)) { "존재하지 않는 좌석입니다." }
         require(selectedSeats.all { reservatedSeats.isAvailable(it) }) { "이미 예약된 좌석입니다." }

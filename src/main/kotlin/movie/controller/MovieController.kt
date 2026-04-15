@@ -13,8 +13,8 @@ import movie.domain.payment.PriceCalculator
 import movie.domain.reservation.Reservation
 import movie.domain.reservation.Reservations
 import movie.domain.screening.Screening
+import movie.domain.seat.SeatPositions
 import movie.domain.seat.SeatInputParser
-import movie.domain.seat.SelectedSeats
 import movie.domain.user.User
 import movie.view.InputView
 import movie.view.OutputView
@@ -110,9 +110,8 @@ class MovieController(
         val movie = selectMovie()
         val date = selectDate(movie)
         val screening = selectScreening(movie, date)
-        val seats = selectSeats(screening)
-        val reservedScreening = screening.reserve(seats)
-        return reservedScreening.createReservation(seats)
+        val seatPositions = selectSeatPositions(screening)
+        return screening.reserve(seatPositions)
     }
 
     // 예매 상세 로직
@@ -124,8 +123,7 @@ class MovieController(
 
     private fun selectDate(movie: Movie): LocalDate =
         executeWithRetry {
-            val input = inputView.inputDate()
-            val date = LocalDate.parse(input.toString())
+            val date = inputView.inputDate()
             require(movie.hasScreeningOnDate(date)) { "해당 날짜에 상영이 없습니다." }
             date
         }
@@ -144,14 +142,11 @@ class MovieController(
             selectedScreening
         }
 
-    private fun selectSeats(screening: Screening): SelectedSeats =
+    private fun selectSeatPositions(screening: Screening): SeatPositions =
         executeWithRetry {
             outputView.printSeatLayout(screening)
             val input = inputView.inputSeat()
-            val positions = seatInputParser.parse(input)
-            val seats = screening.toSelectedSeats(positions)
-            val reserveAvailableSeats = screening.isReserveAvailable(seats)
-            reserveAvailableSeats
+            seatInputParser.parse(input)
         }
 
 
