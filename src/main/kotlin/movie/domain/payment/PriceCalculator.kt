@@ -16,7 +16,7 @@ class PriceCalculator(
         var totalPrice = reservations.totalPrice(discountPolicies)
 
         val usagePoint = point.usableAmount(totalPrice)
-        totalPrice = totalPrice.minus(Money(usagePoint.value))
+        totalPrice = totalPrice.minus(usagePoint.toMoney())
         totalPrice = paymentMethod.applyDiscount(totalPrice)
 
         return PaymentResult(
