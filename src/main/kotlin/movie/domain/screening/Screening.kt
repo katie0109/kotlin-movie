@@ -1,5 +1,7 @@
 package movie.domain.screening
 
+import movie.domain.amount.Money
+import movie.domain.discount.DiscountPolicies
 import movie.domain.movie.MovieTitle
 import movie.domain.reservation.Reservation
 import movie.domain.seat.ReservatedSeats
@@ -41,6 +43,13 @@ class Screening(
         )
 
     fun toSelectedSeats(positions: SeatPositions): SelectedSeats = SelectedSeats.from(positions, slot.screen.seats)
+
+    fun getScreeningDateTime() = slot.screeningDateTime
+
+    fun calculateDiscountedPrice(
+        selectedSeats: SelectedSeats,
+        discountPolicies: DiscountPolicies,
+    ): Money = discountPolicies.applyDiscount(selectedSeats.totalPrice, slot.screeningDateTime)
 
     private fun isValidSeats(selectedSeats: SelectedSeats): Boolean = selectedSeats.all { slot.hasSeat(it) }
 }
