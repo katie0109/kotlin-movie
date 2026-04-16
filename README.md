@@ -7,7 +7,7 @@
 - [x] DatabaseInitializer 구현 (스키마 생성 + 초기 데이터)
 - [x] DB 연결 테스트 작성
 - [x] 도메인 객체에 DB용 ID 추가 
-- [ ] Repository 인터페이스 정의
+- [x] Repository 인터페이스 정의
 - [ ] JdbcReservedSeatRepository 구현 + 테스트
 - [ ] JdbcScreeningRepository 구현 + 테스트
 - [ ] JdbcMovieRepository 구현 + 테스트
