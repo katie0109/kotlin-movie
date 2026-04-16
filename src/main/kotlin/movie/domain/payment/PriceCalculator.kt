@@ -3,6 +3,7 @@ package movie.domain.payment
 import movie.domain.amount.Money
 import movie.domain.amount.Point
 import movie.domain.discount.DiscountPolicies
+import movie.domain.discount.DiscountPolicy
 import movie.domain.reservation.Reservations
 
 class PriceCalculator(

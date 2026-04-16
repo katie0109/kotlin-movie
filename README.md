@@ -28,7 +28,7 @@
 - [x] Movie.kt에 runningTimeMinutes 프로퍼티 추가
 - [x] JdbcMovieRepository.kt SELECT에 running_time_minutes 추가
 - [x] PaymentMethod.kt에 from(String) 오버로드 추가
-- [ ] AppConfig.kt — Connection, Repository, PriceCalculator를 Spring Bean으로 등록
+- [x] AppConfig.kt — Connection, Repository, PriceCalculator를 Spring Bean으로 등록
 - [ ] MovieListResponse DTO 정의
 - [ ] ReservationRequest DTO 정의
 - [ ] ReservationResponse DTO 정의
