@@ -10,7 +10,7 @@
 - [x] Repository 인터페이스 정의
 - [x] JdbcReservedSeatRepository 구현 + 테스트
 - [x] JdbcScreeningRepository 구현 + 테스트
-- [ ] JdbcMovieRepository 구현 + 테스트
+- [x] JdbcMovieRepository 구현 + 테스트
 - [ ] JdbcReservationRepository 구현 + 테스트
 - [ ] 초기 데이터 INSERT (기존 MovieData → DB)
 - [ ] Controller가 Repository 사용하도록 변경
