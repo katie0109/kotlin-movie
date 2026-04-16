@@ -2,7 +2,7 @@
 
 ## 구현할 기능 목록
 - [x] H2 의존성 추가
-- [ ] schema.sql 작성
+- [x] schema.sql 작성
 - [ ] DatabaseConnector 구현 (로컬/테스트 연결)
 - [ ] DatabaseInitializer 구현 (스키마 생성 + 초기 데이터)
 - [ ] DB 연결 테스트 작성
