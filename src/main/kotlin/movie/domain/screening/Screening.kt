@@ -11,7 +11,7 @@ import movie.domain.seat.SelectedSeats
 import java.time.LocalDate
 
 class Screening(
-    val id: Long? = null,
+    val id: Long = 0L,
     private val movie: MovieTitle,
     private val slot: ScreeningSlot,
     private val reservatedSeats: ReservatedSeats,

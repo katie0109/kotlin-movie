@@ -10,6 +10,10 @@ data class Reservations(
         validateNoOverlapping()
     }
 
+    fun forEach(action: (Reservation) -> Unit) {
+        reservations.forEach(action)
+    }
+
     fun add(reservation: Reservation): Reservations = Reservations(reservations + reservation)
 
     fun totalPrice(discountPolicies: DiscountPolicies): Money =
