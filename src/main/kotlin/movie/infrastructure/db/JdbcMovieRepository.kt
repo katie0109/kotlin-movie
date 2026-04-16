@@ -13,7 +13,7 @@ class JdbcMovieRepository(
 ) : MovieRepository {
 
     override fun findAll(): Movies {
-        val sql = "SELECT id, title FROM movie ORDER BY id"
+        val sql = "SELECT id, title, running_time_minutes FROM movie ORDER BY id"
         val movies = mutableListOf<Movie>()
 
         connection.prepareStatement(sql).use { stmt ->
@@ -21,6 +21,7 @@ class JdbcMovieRepository(
                 while (rs.next()) {
                     val movieId = rs.getLong("id")
                     val title = rs.getString("title")
+                    val runningTimeMinutes = rs.getInt("running_time_minutes")
                     val screenings = screeningRepository.findAllByMovieId(movieId)
 
                     movies.add(
@@ -28,6 +29,7 @@ class JdbcMovieRepository(
                             id = movieId,
                             title = MovieTitle(title),
                             screenings = screenings,
+                            runningTimeMinutes = runningTimeMinutes,
                         ),
                     )
                 }
