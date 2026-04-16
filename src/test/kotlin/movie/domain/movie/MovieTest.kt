@@ -18,7 +18,7 @@ class MovieTest {
     @Test
     fun `영화 ID와 제목, 상영 목록을 갖고 있다`() {
         // given
-        val id = UUID.randomUUID()
+        val id = 1L
         val screenings =
             Screenings(
                 listOf(

@@ -40,8 +40,9 @@ object MovieData {
         val screenings =
             listOf(
                 Screening(
-                    MovieTitle("F1 더 무비"),
-                    ScreeningSlot(
+                    id = 101L,
+                    movie = MovieTitle("F1 더 무비"),
+                    slot = ScreeningSlot(
                         screen,
                         ScreeningDateTime(
                             LocalDate.of(2025, 9, 20),
@@ -49,11 +50,12 @@ object MovieData {
                             LocalTime.of(12, 20),
                         ),
                     ),
-                    ReservatedSeats(emptyList()),
+                    reservatedSeats = ReservatedSeats(emptyList()),
                 ),
                 Screening(
-                    MovieTitle("F1 더 무비"),
-                    ScreeningSlot(
+                    id = 102L,
+                    movie = MovieTitle("F1 더 무비"),
+                    slot = ScreeningSlot(
                         screen,
                         ScreeningDateTime(
                             LocalDate.of(2025, 9, 20),
@@ -61,7 +63,7 @@ object MovieData {
                             LocalTime.of(15, 0),
                         ),
                     ),
-                    ReservatedSeats(
+                    reservatedSeats = ReservatedSeats(
                         listOf(
                             Seat(SeatRow("B"), SeatColumn(2), SeatGrade.B),
                             Seat(SeatRow("B"), SeatColumn(3), SeatGrade.B),
@@ -71,8 +73,9 @@ object MovieData {
                     ),
                 ),
                 Screening(
-                    MovieTitle("F1 더 무비"),
-                    ScreeningSlot(
+                    id = 103L,
+                    movie = MovieTitle("F1 더 무비"),
+                    slot = ScreeningSlot(
                         screen,
                         ScreeningDateTime(
                             LocalDate.of(2025, 9, 20),
@@ -80,11 +83,12 @@ object MovieData {
                             LocalTime.of(17, 40),
                         ),
                     ),
-                    ReservatedSeats(emptyList()),
+                    reservatedSeats = ReservatedSeats(emptyList()),
                 ),
                 Screening(
-                    MovieTitle("F1 더 무비"),
-                    ScreeningSlot(
+                    id = 104L,
+                    movie = MovieTitle("F1 더 무비"),
+                    slot = ScreeningSlot(
                         screen,
                         ScreeningDateTime(
                             LocalDate.of(2025, 9, 20),
@@ -92,10 +96,11 @@ object MovieData {
                             LocalTime.of(22, 10),
                         ),
                     ),
-                    ReservatedSeats(emptyList()),
+                    reservatedSeats = ReservatedSeats(emptyList()),
                 ),
             )
         return Movie(
+            id = 1L,
             title = MovieTitle("F1 더 무비"),
             screenings = Screenings(screenings),
         )
@@ -105,8 +110,9 @@ object MovieData {
         val screenings =
             listOf(
                 Screening(
-                    MovieTitle("토이 스토리"),
-                    ScreeningSlot(
+                    id = 201L,
+                    movie = MovieTitle("토이 스토리"),
+                    slot = ScreeningSlot(
                         screen,
                         ScreeningDateTime(
                             LocalDate.of(2025, 9, 20),
@@ -114,11 +120,12 @@ object MovieData {
                             LocalTime.of(15, 30),
                         ),
                     ),
-                    ReservatedSeats(emptyList()),
+                    reservatedSeats = ReservatedSeats(emptyList()),
                 ),
                 Screening(
-                    MovieTitle("토이 스토리"),
-                    ScreeningSlot(
+                    id = 202L,
+                    movie = MovieTitle("토이 스토리"),
+                    slot = ScreeningSlot(
                         screen,
                         ScreeningDateTime(
                             LocalDate.of(2025, 9, 20),
@@ -126,11 +133,12 @@ object MovieData {
                             LocalTime.of(18, 0),
                         ),
                     ),
-                    ReservatedSeats(emptyList()),
+                    reservatedSeats = ReservatedSeats(emptyList()),
                 ),
             )
         return Movie(
-            title =  MovieTitle("토이 스토리"),
+            id = 2L,
+            title = MovieTitle("토이 스토리"),
             screenings = Screenings(screenings),
         )
     }
@@ -139,8 +147,9 @@ object MovieData {
         val screenings =
             listOf(
                 Screening(
-                    MovieTitle("아이언맨"),
-                    ScreeningSlot(
+                    id = 301L,
+                    movie = MovieTitle("아이언맨"),
+                    slot = ScreeningSlot(
                         screen,
                         ScreeningDateTime(
                             LocalDate.of(2025, 9, 20),
@@ -148,11 +157,12 @@ object MovieData {
                             LocalTime.of(11, 50),
                         ),
                     ),
-                    ReservatedSeats(emptyList()),
+                    reservatedSeats = ReservatedSeats(emptyList()),
                 ),
             )
         return Movie(
-            title =  MovieTitle("아이언맨"),
+            id = 3L,
+            title = MovieTitle("아이언맨"),
             screenings = Screenings(screenings),
         )
     }

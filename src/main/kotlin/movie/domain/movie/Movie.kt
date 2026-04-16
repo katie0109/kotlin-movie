@@ -5,7 +5,7 @@ import java.time.LocalDate
 import java.util.UUID
 
 data class Movie(
-    val id: UUID = UUID.randomUUID(),
+    val id: Long? = null,
     val title: MovieTitle,
     val screenings: Screenings,
 ) {

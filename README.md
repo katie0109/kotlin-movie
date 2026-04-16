@@ -5,8 +5,8 @@
 - [x] schema.sql 작성
 - [x] DatabaseConnector 구현 (로컬/테스트 연결)
 - [x] DatabaseInitializer 구현 (스키마 생성 + 초기 데이터)
-- [ ] DB 연결 테스트 작성
-- [ ] 도메인 객체에 DB용 ID 추가 
+- [x] DB 연결 테스트 작성
+- [x] 도메인 객체에 DB용 ID 추가 
 - [ ] Repository 인터페이스 정의
 - [ ] JdbcReservedSeatRepository 구현 + 테스트
 - [ ] JdbcScreeningRepository 구현 + 테스트
@@ -14,4 +14,3 @@
 - [ ] JdbcReservationRepository 구현 + 테스트
 - [ ] 초기 데이터 INSERT (기존 MovieData → DB)
 - [ ] Controller가 Repository 사용하도록 변경
-- [ ] 통합 테스트

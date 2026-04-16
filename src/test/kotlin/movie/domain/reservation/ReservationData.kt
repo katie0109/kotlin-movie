@@ -29,6 +29,7 @@ object ReservationData {
 
     private val screening1 =
         Screening(
+            id = 101L,
             MovieTitle("토이 스토리"),
             ScreeningSlot(
                 screen,
@@ -43,6 +44,7 @@ object ReservationData {
 
     private val screening2 =
         Screening(
+            id = 102L,
             MovieTitle("F1 더 무비"),
             ScreeningSlot(
                 screen,

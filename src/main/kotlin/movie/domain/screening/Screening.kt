@@ -11,6 +11,7 @@ import movie.domain.seat.SelectedSeats
 import java.time.LocalDate
 
 class Screening(
+    val id: Long? = null,
     private val movie: MovieTitle,
     private val slot: ScreeningSlot,
     private val reservatedSeats: ReservatedSeats,
@@ -33,6 +34,7 @@ class Screening(
 
     fun reserve(selectedSeats: SelectedSeats): Screening =
         Screening(
+            id,
             movie,
             slot,
             reservatedSeats.add(selectedSeats),
