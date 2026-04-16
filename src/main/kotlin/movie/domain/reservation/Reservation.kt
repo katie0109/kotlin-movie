@@ -19,9 +19,13 @@ class Reservation(
     fun calculateDiscountedPrice(discountPolicies: DiscountPolicies): Money =
         discountPolicies.applyDiscount(basePrice(), screeningDateTime())
 
-    fun getScreening(): Screening = screening
+    fun screeningTitleText(): String = screening.titleText()
 
-    fun getSelectedSeats(): SelectedSeats = selectedSeats
+    fun screeningDateText(): String = screening.dateText()
+
+    fun screeningStartTimeText(): String = screening.startTimeText()
+
+    fun selectedSeatDisplay(): String = selectedSeats.display()
 
     private fun basePrice(): Money = selectedSeats.totalPrice
 
