@@ -1,25 +1,11 @@
 package movie
 
-import movie.controller.MovieController
-import movie.infrastructure.db.DatabaseConnector
-import movie.infrastructure.db.DatabaseInitializer
-import movie.infrastructure.db.JdbcMovieRepository
-import movie.infrastructure.db.JdbcReservationRepository
-import movie.infrastructure.db.JdbcReservedSeatRepository
-import movie.infrastructure.db.JdbcScreeningRepository
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 
-fun main() {
-    val connection = DatabaseConnector.connectLocal()
-    DatabaseInitializer(connection).initialize()
+@SpringBootApplication
+class Application
 
-    val reservedSeatRepository = JdbcReservedSeatRepository(connection)
-    val screeningRepository = JdbcScreeningRepository(connection, reservedSeatRepository)
-    val movieRepository = JdbcMovieRepository(connection, screeningRepository)
-    val reservationRepository = JdbcReservationRepository(connection, reservedSeatRepository)
-
-    val controller = MovieController(
-        movieRepository = movieRepository,
-        reservationRepository = reservationRepository,
-    )
-    controller.run()
+fun main(args: Array<String>) {
+    runApplication<Application>(*args)
 }
