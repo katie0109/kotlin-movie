@@ -78,7 +78,6 @@ class JdbcMovieRepositoryTest {
         val movie = movies.findMovie("F1 더 무비")
         val screenings = movie.getScreeningsByDate(LocalDate.of(2025, 9, 20))
 
-        // 2번째 상영 (13:00) = 예약 좌석 4개
         val screening = screenings.findByNumber(2)
         val testSeat = Seat(SeatRow("B"), SeatColumn(2), SeatGrade.B)
         assertThat(screening.isSeatAvailable(testSeat)).isFalse()

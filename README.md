@@ -13,4 +13,4 @@
 - [x] JdbcMovieRepository 구현 + 테스트
 - [x] JdbcReservationRepository 구현 + 테스트
 - [x] 초기 데이터 INSERT (기존 MovieData → DB)
-- [ ] Controller가 Repository 사용하도록 변경
+- [x] Controller가 Repository 사용하도록 변경

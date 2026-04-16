@@ -1,7 +1,5 @@
 package movie.controller
 
-import movie.data.MovieData
-import movie.domain.payment.PaymentResult
 import movie.domain.amount.Point
 import movie.domain.discount.DiscountPolicies
 import movie.domain.discount.MovieDayDiscount
@@ -9,13 +7,16 @@ import movie.domain.discount.TimeDiscount
 import movie.domain.movie.Movie
 import movie.domain.movie.Movies
 import movie.domain.payment.PaymentMethod
+import movie.domain.payment.PaymentResult
 import movie.domain.payment.PriceCalculator
 import movie.domain.reservation.Reservation
 import movie.domain.reservation.Reservations
 import movie.domain.screening.Screening
-import movie.domain.seat.SeatPositions
 import movie.domain.seat.SeatInputParser
+import movie.domain.seat.SelectedSeats
 import movie.domain.user.User
+import movie.repository.MovieRepository
+import movie.repository.ReservationRepository
 import movie.view.InputView
 import movie.view.OutputView
 import java.time.LocalDate
@@ -24,8 +25,9 @@ class MovieController(
     private val inputView: InputView = InputView(),
     private val outputView: OutputView = OutputView(),
     private val seatInputParser: SeatInputParser = SeatInputParser(),
-    private val movies: Movies = MovieData.createMovies(),
-    private val user: User = MovieData.createUser(),
+    private val movieRepository: MovieRepository,
+    private val reservationRepository: ReservationRepository,
+    private val user: User = User(Reservations(emptyList()), Point(10000)),
     private val priceCalculator: PriceCalculator =
         PriceCalculator(
             DiscountPolicies(
@@ -37,7 +39,8 @@ class MovieController(
     fun run() {
         if (!askStartReservation()) return
 
-        val reservations = collectReservations()
+        val movies = movieRepository.findAll()
+        val reservations = collectReservations(movies)
 
         showCart(reservations)
 
@@ -64,6 +67,13 @@ class MovieController(
         val confirm = executeWithRetry { inputView.confirmPayment() }
 
         if (confirm) {
+            val paymentMethod = paymentResult.paymentMethodName()
+            reservationRepository.save(
+                reservations,
+                paymentResult.totalPrice,
+                paymentResult.usedPoint,
+                paymentMethod,
+            )
             outputView.printComplete(
                 reservations,
                 paymentResult.totalPrice,
@@ -89,33 +99,34 @@ class MovieController(
     }
 
     // 예매 로직
-    private fun collectReservations(): Reservations {
+    private fun collectReservations(movies: Movies): Reservations {
         var reservations = Reservations(emptyList())
         do {
-            reservations = addReservation(reservations)
+            reservations = addReservation(movies, reservations)
         } while (askAddMore())
 
         return reservations
     }
 
-    private fun addReservation(existingReservations: Reservations): Reservations =
+    private fun addReservation(movies: Movies, existingReservations: Reservations): Reservations =
         executeWithRetry {
-            val reservation = selectMovieAndSeats()
+            val reservation = selectMovieAndSeats(movies)
             val updatedReservations = existingReservations.add(reservation)
             outputView.printAddedToCart(reservation)
             updatedReservations
         }
 
-    private fun selectMovieAndSeats(): Reservation {
-        val movie = selectMovie()
+    private fun selectMovieAndSeats(movies: Movies): Reservation {
+        val movie = selectMovie(movies)
         val date = selectDate(movie)
         val screening = selectScreening(movie, date)
-        val seatPositions = selectSeatPositions(screening)
-        return screening.reserve(seatPositions)
+        val seats = selectSeats(screening)
+        val reservedScreening = screening.reserve(seats)
+        return reservedScreening.createReservation(seats)
     }
 
     // 예매 상세 로직
-    private fun selectMovie(): Movie =
+    private fun selectMovie(movies: Movies): Movie =
         executeWithRetry {
             val title = inputView.inputMovieTitle()
             movies.findMovie(title)
@@ -123,7 +134,8 @@ class MovieController(
 
     private fun selectDate(movie: Movie): LocalDate =
         executeWithRetry {
-            val date = inputView.inputDate()
+            val input = inputView.inputDate()
+            val date = LocalDate.parse(input.toString())
             require(movie.hasScreeningOnDate(date)) { "해당 날짜에 상영이 없습니다." }
             date
         }
@@ -142,13 +154,15 @@ class MovieController(
             selectedScreening
         }
 
-    private fun selectSeatPositions(screening: Screening): SeatPositions =
+    private fun selectSeats(screening: Screening): SelectedSeats =
         executeWithRetry {
             outputView.printSeatLayout(screening)
             val input = inputView.inputSeat()
-            seatInputParser.parse(input)
+            val positions = seatInputParser.parse(input)
+            val seats = screening.toSelectedSeats(positions)
+            val reserveAvailableSeats = screening.isReserveAvailable(seats)
+            reserveAvailableSeats
         }
-
 
     // 입력 로직
     private fun askStartReservation(): Boolean = executeWithRetry { inputView.startMessage() }
