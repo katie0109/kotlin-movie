@@ -9,7 +9,7 @@
 - [x] 도메인 객체에 DB용 ID 추가 
 - [x] Repository 인터페이스 정의
 - [x] JdbcReservedSeatRepository 구현 + 테스트
-- [ ] JdbcScreeningRepository 구현 + 테스트
+- [x] JdbcScreeningRepository 구현 + 테스트
 - [ ] JdbcMovieRepository 구현 + 테스트
 - [ ] JdbcReservationRepository 구현 + 테스트
 - [ ] 초기 데이터 INSERT (기존 MovieData → DB)
