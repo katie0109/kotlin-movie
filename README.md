@@ -8,7 +8,7 @@
 - [x] DB 연결 테스트 작성
 - [x] 도메인 객체에 DB용 ID 추가 
 - [x] Repository 인터페이스 정의
-- [ ] JdbcReservedSeatRepository 구현 + 테스트
+- [x] JdbcReservedSeatRepository 구현 + 테스트
 - [ ] JdbcScreeningRepository 구현 + 테스트
 - [ ] JdbcMovieRepository 구현 + 테스트
 - [ ] JdbcReservationRepository 구현 + 테스트
