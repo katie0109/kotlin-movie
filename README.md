@@ -15,3 +15,35 @@
 - [x] 초기 데이터 INSERT (기존 MovieData → DB)
 - [x] Controller가 Repository 사용하도록 변경
 - [x] 통합 테스트 작성
+
+#4단계 - 영화 예매(프레임워크)
+
+## 구현할 기능 목록
+- [x] Spring Boot 의존성 추가
+- [x] ConsoleApplication과 Application 분리
+- [x]  Application.kt — @SpringBootApplication 진입점 작성
+- [ ] Movies.kt에 toList() 추가
+- [ ] Screenings.kt에 toList() 추가
+- [ ] Screening.kt에 endTimeText() 추가
+- [ ] Movie.kt에 runningTimeMinutes 프로퍼티 추가
+- [ ] JdbcMovieRepository.kt SELECT에 running_time_minutes 추가
+- [ ] PaymentMethod.kt에 from(String) 오버로드 추가
+- [ ] AppConfig.kt — Connection, Repository, PriceCalculator를 Spring Bean으로 등록
+- [ ] MovieListResponse DTO 정의
+- [ ] ReservationRequest DTO 정의
+- [ ] ReservationResponse DTO 정의
+- [ ] ErrorResponse DTO 정의
+- [ ] MovieApiController 구현 - GET /api/movies
+- [ ] ReservationApiController 구현 - GET /api/screenings
+- [ ] GlobalExceptionHandler 구현 — 에러 → HTTP 상태코드 매핑
+
+### 테스트
+- [ ] 영화 목록 조회 시 200 OK 반환 테스트
+- [ ] 영화 목록 응답에 영화와 상영 정보가 포함되는 테스트
+- [ ] 예매 생성 시 201 Created 반환 테스트
+- [ ] 예매 응답에 reservationId와 totalPrice가 포함되는 테스트
+- [ ] 이미 예약된 좌석 예매 시 오류 응답 반환 테스트
+- [ ] 존재하지 않는 상영 ID로 예매 시 오류 응답 반환 테스트
+- [ ] 잘못된 요청 형식에 대해 오류 응답 반환 테스트
+- [ ] 시간이 겹치는 예매 시 오류 응답 반환 테스트
+- [ ] 기존 도메인 단위 테스트 유지 확인
