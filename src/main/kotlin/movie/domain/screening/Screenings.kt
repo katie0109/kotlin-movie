@@ -17,4 +17,6 @@ data class Screenings(
         require(number in 1..screenings.size) { "유효하지 않은 상영 번호입니다." }
         return screenings[number - 1]
     }
+
+    fun toList(): List<Screening> = screenings
 }

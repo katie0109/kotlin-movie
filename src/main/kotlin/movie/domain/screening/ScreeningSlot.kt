@@ -14,6 +14,9 @@ class ScreeningSlot(
     val startTime: LocalTime
         get() = screeningDateTime.startTime
 
+    val endTime: LocalTime
+        get() = screeningDateTime.endTime
+
     fun isOverlapping(other: ScreeningSlot): Boolean = screeningDateTime.isOverlapping(other.screeningDateTime)
 
     fun hasSeat(seat: Seat): Boolean = screen.seats.hasSeat(seat)

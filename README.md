@@ -22,10 +22,10 @@
 - [x] Spring Boot 의존성 추가
 - [x] ConsoleApplication과 Application 분리
 - [x]  Application.kt — @SpringBootApplication 진입점 작성
-- [ ] Movies.kt에 toList() 추가
-- [ ] Screenings.kt에 toList() 추가
-- [ ] Screening.kt에 endTimeText() 추가
-- [ ] Movie.kt에 runningTimeMinutes 프로퍼티 추가
+- [x] Movies.kt에 toList() 추가
+- [x] Screenings.kt에 toList() 추가
+- [x] Screening.kt에 endTimeText() 추가
+- [x] Movie.kt에 runningTimeMinutes 프로퍼티 추가
 - [ ] JdbcMovieRepository.kt SELECT에 running_time_minutes 추가
 - [ ] PaymentMethod.kt에 from(String) 오버로드 추가
 - [ ] AppConfig.kt — Connection, Repository, PriceCalculator를 Spring Bean으로 등록
