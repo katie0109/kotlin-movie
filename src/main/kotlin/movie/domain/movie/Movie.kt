@@ -2,7 +2,6 @@ package movie.domain.movie
 
 import movie.domain.screening.Screenings
 import java.time.LocalDate
-import java.util.UUID
 
 data class Movie(
     val id: Long = 0L,
