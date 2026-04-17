@@ -38,8 +38,10 @@ class ReservationApiControllerTest(
             .contentType(MediaType.APPLICATION_JSON)
             .body(validReservationRequest())
             .exchange()
-            .expectStatus().isCreated()
-            .expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+            .expectStatus()
+            .isCreated()
+            .expectHeader()
+            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
     }
 
     @Test
@@ -50,16 +52,25 @@ class ReservationApiControllerTest(
             .contentType(MediaType.APPLICATION_JSON)
             .body(validReservationRequest())
             .exchange()
-            .expectStatus().isCreated()
-            .expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+            .expectStatus()
+            .isCreated()
+            .expectHeader()
+            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
             .expectBody()
-            .jsonPath("$.reservationId").exists()
-            .jsonPath("$.reservations").isArray()
-            .jsonPath("$.reservations[0].screeningId").exists()
-            .jsonPath("$.reservations[0].seats[0]").exists()
-            .jsonPath("$.usedPoints").exists()
-            .jsonPath("$.paymentMethod").exists()
-            .jsonPath("$.totalPrice").exists()
+            .jsonPath("$.reservationId")
+            .exists()
+            .jsonPath("$.reservations")
+            .isArray()
+            .jsonPath("$.reservations[0].screeningId")
+            .exists()
+            .jsonPath("$.reservations[0].seats[0]")
+            .exists()
+            .jsonPath("$.usedPoints")
+            .exists()
+            .jsonPath("$.paymentMethod")
+            .exists()
+            .jsonPath("$.totalPrice")
+            .exists()
     }
 
     private fun validReservationRequest(): String =
@@ -98,4 +109,3 @@ class ReservationApiControllerTest(
         }
     }
 }
-

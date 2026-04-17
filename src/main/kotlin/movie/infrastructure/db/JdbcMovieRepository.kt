@@ -11,7 +11,6 @@ class JdbcMovieRepository(
     private val connection: Connection,
     private val screeningRepository: ScreeningRepository,
 ) : MovieRepository {
-
     override fun findAll(): Movies {
         val sql = "SELECT id, title, running_time_minutes FROM movie ORDER BY id"
         val movies = mutableListOf<Movie>()

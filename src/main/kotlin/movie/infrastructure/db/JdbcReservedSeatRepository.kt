@@ -2,12 +2,10 @@ package movie.infrastructure.db
 
 import movie.domain.seat.Seat
 import movie.domain.seat.SeatColumn
-import movie.domain.seat.SeatGrade
 import movie.domain.seat.SeatRow
 import movie.domain.seat.Seats
 import movie.repository.ReservedSeatRepository
 import java.sql.Connection
-
 
 class JdbcReservedSeatRepository(
     private val connection: Connection,
@@ -33,7 +31,10 @@ class JdbcReservedSeatRepository(
         return seats
     }
 
-    override fun saveAll(screeningId: Long, seats: List<Seat>) {
+    override fun saveAll(
+        screeningId: Long,
+        seats: List<Seat>,
+    ) {
         val sql = "INSERT INTO reserved_seat (screening_id, seat_row, seat_column) VALUES (?, ?, ?)"
 
         connection.prepareStatement(sql).use { stmt ->

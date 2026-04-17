@@ -82,7 +82,9 @@ class OutputView {
     }
 
     private fun printReservationDetail(reservation: Reservation) {
-        println("- [${reservation.screeningTitleText()}] ${reservation.screeningDateText()} ${reservation.screeningStartTimeText()}  좌석: ${reservation.selectedSeatDisplay()}")
+        println(
+            "- [${reservation.screeningTitleText()}] ${reservation.screeningDateText()} ${reservation.screeningStartTimeText()}  좌석: ${reservation.selectedSeatDisplay()}",
+        )
     }
 
     private fun printReservationList(reservations: Reservations) {

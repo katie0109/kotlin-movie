@@ -1,6 +1,5 @@
 package movie.infrastructure.db
 
-
 import movie.domain.amount.Money
 import movie.domain.amount.Point
 import movie.domain.movie.MovieTitle
@@ -47,25 +46,28 @@ class JdbcReservationRepositoryTest {
 
     private fun createReservation(screeningId: Long): Reservation {
         val screen = Screen(ScreenId(1), Seats.createDefault())
-        val screening = Screening(
-            id = screeningId,
-            movie = MovieTitle("F1 더 무비"),
-            slot = ScreeningSlot(
-                screen,
-                ScreeningDateTime(
-                    LocalDate.of(2025, 9, 20),
-                    LocalTime.of(10, 20),
-                    LocalTime.of(12, 20),
+        val screening =
+            Screening(
+                id = screeningId,
+                movie = MovieTitle("F1 더 무비"),
+                slot =
+                    ScreeningSlot(
+                        screen,
+                        ScreeningDateTime(
+                            LocalDate.of(2025, 9, 20),
+                            LocalTime.of(10, 20),
+                            LocalTime.of(12, 20),
+                        ),
+                    ),
+                reservatedSeats = ReservatedSeats(emptyList()),
+            )
+        val selectedSeats =
+            SelectedSeats(
+                listOf(
+                    Seat(SeatRow("A"), SeatColumn(1), SeatGrade.B),
+                    Seat(SeatRow("A"), SeatColumn(2), SeatGrade.B),
                 ),
-            ),
-            reservatedSeats = ReservatedSeats(emptyList()),
-        )
-        val selectedSeats = SelectedSeats(
-            listOf(
-                Seat(SeatRow("A"), SeatColumn(1), SeatGrade.B),
-                Seat(SeatRow("A"), SeatColumn(2), SeatGrade.B),
-            ),
-        )
+            )
         return Reservation(screening, selectedSeats)
     }
 
@@ -74,12 +76,13 @@ class JdbcReservationRepositoryTest {
         val reservation = createReservation(101L)
         val reservations = Reservations(listOf(reservation))
 
-        val reservationId = reservationRepository.save(
-            reservations,
-            Money(24000),
-            Point(1000),
-            "CREDIT_CARD",
-        )
+        val reservationId =
+            reservationRepository.save(
+                reservations,
+                Money(24000),
+                Point(1000),
+                "CREDIT_CARD",
+            )
 
         assertThat(reservationId).isGreaterThan(0L)
     }
@@ -96,12 +99,13 @@ class JdbcReservationRepositoryTest {
             "CREDIT_CARD",
         )
 
-        val count = connection.createStatement().use { stmt ->
-            stmt.executeQuery("SELECT COUNT(*) FROM reservation").use { rs ->
-                rs.next()
-                rs.getInt(1)
+        val count =
+            connection.createStatement().use { stmt ->
+                stmt.executeQuery("SELECT COUNT(*) FROM reservation").use { rs ->
+                    rs.next()
+                    rs.getInt(1)
+                }
             }
-        }
         assertThat(count).isEqualTo(1)
     }
 
@@ -117,12 +121,13 @@ class JdbcReservationRepositoryTest {
             "CREDIT_CARD",
         )
 
-        val count = connection.createStatement().use { stmt ->
-            stmt.executeQuery("SELECT COUNT(*) FROM reservation_item").use { rs ->
-                rs.next()
-                rs.getInt(1)
+        val count =
+            connection.createStatement().use { stmt ->
+                stmt.executeQuery("SELECT COUNT(*) FROM reservation_item").use { rs ->
+                    rs.next()
+                    rs.getInt(1)
+                }
             }
-        }
         assertThat(count).isEqualTo(1)
     }
 
@@ -138,12 +143,13 @@ class JdbcReservationRepositoryTest {
             "CREDIT_CARD",
         )
 
-        val count = connection.createStatement().use { stmt ->
-            stmt.executeQuery("SELECT COUNT(*) FROM reservation_seat").use { rs ->
-                rs.next()
-                rs.getInt(1)
+        val count =
+            connection.createStatement().use { stmt ->
+                stmt.executeQuery("SELECT COUNT(*) FROM reservation_seat").use { rs ->
+                    rs.next()
+                    rs.getInt(1)
+                }
             }
-        }
         assertThat(count).isEqualTo(2)
     }
 
@@ -166,40 +172,45 @@ class JdbcReservationRepositoryTest {
     @Test
     fun `여러 예매를 한꺼번에 저장할 수 있다`() {
         val screen = Screen(ScreenId(1), Seats.createDefault())
-        val selectedSeats = SelectedSeats(
-            listOf(
-                Seat(SeatRow("A"), SeatColumn(1), SeatGrade.B),
-                Seat(SeatRow("A"), SeatColumn(2), SeatGrade.B),
-            ),
-        )
-
-        val screening1 = Screening(
-            id = 101L,
-            movie = MovieTitle("F1 더 무비"),
-            slot = ScreeningSlot(
-                screen,
-                ScreeningDateTime(
-                    LocalDate.of(2025, 9, 20),
-                    LocalTime.of(10, 20),
-                    LocalTime.of(12, 20),
+        val selectedSeats =
+            SelectedSeats(
+                listOf(
+                    Seat(SeatRow("A"), SeatColumn(1), SeatGrade.B),
+                    Seat(SeatRow("A"), SeatColumn(2), SeatGrade.B),
                 ),
-            ),
-            reservatedSeats = ReservatedSeats(emptyList()),
-        )
+            )
 
-        val screening2 = Screening(
-            id = 201L,
-            movie = MovieTitle("토이 스토리"),
-            slot = ScreeningSlot(
-                screen,
-                ScreeningDateTime(
-                    LocalDate.of(2025, 9, 20),
-                    LocalTime.of(13, 30),
-                    LocalTime.of(15, 30),
-                ),
-            ),
-            reservatedSeats = ReservatedSeats(emptyList()),
-        )
+        val screening1 =
+            Screening(
+                id = 101L,
+                movie = MovieTitle("F1 더 무비"),
+                slot =
+                    ScreeningSlot(
+                        screen,
+                        ScreeningDateTime(
+                            LocalDate.of(2025, 9, 20),
+                            LocalTime.of(10, 20),
+                            LocalTime.of(12, 20),
+                        ),
+                    ),
+                reservatedSeats = ReservatedSeats(emptyList()),
+            )
+
+        val screening2 =
+            Screening(
+                id = 201L,
+                movie = MovieTitle("토이 스토리"),
+                slot =
+                    ScreeningSlot(
+                        screen,
+                        ScreeningDateTime(
+                            LocalDate.of(2025, 9, 20),
+                            LocalTime.of(13, 30),
+                            LocalTime.of(15, 30),
+                        ),
+                    ),
+                reservatedSeats = ReservatedSeats(emptyList()),
+            )
 
         val reservation1 = Reservation(screening1, selectedSeats)
         val reservation2 = Reservation(screening2, selectedSeats)
@@ -212,20 +223,22 @@ class JdbcReservationRepositoryTest {
             "CASH",
         )
 
-        val itemCount = connection.createStatement().use { stmt ->
-            stmt.executeQuery("SELECT COUNT(*) FROM reservation_item").use { rs ->
-                rs.next()
-                rs.getInt(1)
+        val itemCount =
+            connection.createStatement().use { stmt ->
+                stmt.executeQuery("SELECT COUNT(*) FROM reservation_item").use { rs ->
+                    rs.next()
+                    rs.getInt(1)
+                }
             }
-        }
         assertThat(itemCount).isEqualTo(2)
 
-        val seatCount = connection.createStatement().use { stmt ->
-            stmt.executeQuery("SELECT COUNT(*) FROM reservation_seat").use { rs ->
-                rs.next()
-                rs.getInt(1)
+        val seatCount =
+            connection.createStatement().use { stmt ->
+                stmt.executeQuery("SELECT COUNT(*) FROM reservation_seat").use { rs ->
+                    rs.next()
+                    rs.getInt(1)
+                }
             }
-        }
         assertThat(seatCount).isEqualTo(4)
     }
 }

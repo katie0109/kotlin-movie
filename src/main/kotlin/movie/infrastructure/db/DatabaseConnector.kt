@@ -9,9 +9,7 @@ object DatabaseConnector {
     private const val USER = "sa"
     private const val PASSWORD = ""
 
-    fun connectLocal(): Connection =
-        DriverManager.getConnection(LOCAL_URL, USER, PASSWORD)
+    fun connectLocal(): Connection = DriverManager.getConnection(LOCAL_URL, USER, PASSWORD)
 
-    fun connectTest(): Connection =
-        DriverManager.getConnection(TEST_URL, USER, PASSWORD)
+    fun connectTest(): Connection = DriverManager.getConnection(TEST_URL, USER, PASSWORD)
 }

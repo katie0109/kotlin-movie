@@ -1,6 +1,5 @@
 package movie.infrastructure.db
 
-
 import movie.domain.seat.Seat
 import movie.domain.seat.SeatColumn
 import movie.domain.seat.SeatGrade
@@ -47,7 +46,8 @@ class JdbcMovieRepositoryTest {
         val movie = movies.findMovie("F1 더 무비")
 
         var count = 0
-        movie.getScreeningsByDate(LocalDate.of(2025, 9, 20))
+        movie
+            .getScreeningsByDate(LocalDate.of(2025, 9, 20))
             .forEachIndexed { _, _ -> count++ }
 
         assertThat(count).isEqualTo(4)
@@ -57,9 +57,10 @@ class JdbcMovieRepositoryTest {
     fun `존재하지 않는 영화를 찾으면 예외가 발생한다`() {
         val movies = movieRepository.findAll()
 
-        val exception = assertThrows<IllegalArgumentException> {
-            movies.findMovie("존재하지 않는 영화")
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                movies.findMovie("존재하지 않는 영화")
+            }
         assertThat(exception.message).isEqualTo("영화를 찾을 수 없습니다.")
     }
 

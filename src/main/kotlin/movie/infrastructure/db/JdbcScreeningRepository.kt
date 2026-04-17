@@ -18,14 +18,14 @@ class JdbcScreeningRepository(
     private val connection: Connection,
     private val reservedSeatRepository: ReservedSeatRepository,
 ) : ScreeningRepository {
-
     override fun findById(id: Long): Screening {
-        val sql = """
+        val sql =
+            """
             SELECT s.id, s.screen_id, s.start_at, s.end_at, m.title
             FROM screening s
             JOIN movie m ON s.movie_id = m.id
             WHERE s.id = ?
-        """.trimIndent()
+            """.trimIndent()
 
         connection.prepareStatement(sql).use { stmt ->
             stmt.setLong(1, id)
@@ -37,13 +37,14 @@ class JdbcScreeningRepository(
     }
 
     override fun findAllByMovieId(movieId: Long): Screenings {
-        val sql = """
+        val sql =
+            """
             SELECT s.id, s.screen_id, s.start_at, s.end_at, m.title
             FROM screening s
             JOIN movie m ON s.movie_id = m.id
             WHERE s.movie_id = ?
             ORDER BY s.start_at
-        """.trimIndent()
+            """.trimIndent()
 
         val screenings = mutableListOf<Screening>()
 
@@ -71,14 +72,15 @@ class JdbcScreeningRepository(
         return Screening(
             id = screeningId,
             movie = MovieTitle(title),
-            slot = ScreeningSlot(
-                Screen(ScreenId(screenId), Seats.createDefault()),
-                ScreeningDateTime(
-                    startAt.toLocalDate(),
-                    startAt.toLocalTime(),
-                    endAt.toLocalTime(),
+            slot =
+                ScreeningSlot(
+                    Screen(ScreenId(screenId), Seats.createDefault()),
+                    ScreeningDateTime(
+                        startAt.toLocalDate(),
+                        startAt.toLocalTime(),
+                        endAt.toLocalTime(),
+                    ),
                 ),
-            ),
             reservatedSeats = ReservatedSeats(reservedSeats),
         )
     }

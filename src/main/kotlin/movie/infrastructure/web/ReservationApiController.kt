@@ -6,9 +6,9 @@ import movie.domain.payment.PriceCalculator
 import movie.domain.reservation.Reservation
 import movie.domain.reservation.Reservations
 import movie.domain.seat.SeatInputParser
-import movie.infrastructure.web.dto.ReservationRequest
 import movie.infrastructure.web.dto.ReservationItemRequest
 import movie.infrastructure.web.dto.ReservationItemResponse
+import movie.infrastructure.web.dto.ReservationRequest
 import movie.infrastructure.web.dto.ReservationResponse
 import movie.repository.ReservationRepository
 import movie.repository.ScreeningRepository
@@ -35,12 +35,13 @@ class ReservationApiController(
         val paymentMethod = PaymentMethod.from(request.paymentMethod)
         val paymentResult = priceCalculator.calculate(reservations, Point(request.usedPoints), paymentMethod)
 
-        val reservationId = reservationRepository.save(
-            reservations,
-            paymentResult.totalPrice,
-            paymentResult.usedPoint,
-            paymentResult.paymentMethodName(),
-        )
+        val reservationId =
+            reservationRepository.save(
+                reservations,
+                paymentResult.totalPrice,
+                paymentResult.usedPoint,
+                paymentResult.paymentMethodName(),
+            )
 
         val response =
             ReservationResponse(
@@ -61,4 +62,3 @@ class ReservationApiController(
         return screening.reserve(availableSeats).createReservation(availableSeats)
     }
 }
-

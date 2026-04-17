@@ -11,18 +11,20 @@ class DatabaseInitializer(
     }
 
     private fun createSchema() {
-        val sql = this::class.java.classLoader
-            .getResource("schema.sql")!!
-            .readText()
+        val sql =
+            this::class.java.classLoader
+                .getResource("schema.sql")!!
+                .readText()
         connection.createStatement().use { it.execute(sql) }
     }
 
     private fun insertInitialData() {
-        val hasData = connection.createStatement().use { statement ->
-            val resultSet = statement.executeQuery("SELECT COUNT(*) FROM movie")
-            resultSet.next()
-            resultSet.getInt(1) > 0
-        }
+        val hasData =
+            connection.createStatement().use { statement ->
+                val resultSet = statement.executeQuery("SELECT COUNT(*) FROM movie")
+                resultSet.next()
+                resultSet.getInt(1) > 0
+            }
 
         if (hasData) return
 

@@ -1,6 +1,5 @@
 package movie.infrastructure.web.dto
 
-
 data class ReservationResponse(
     val reservationId: Long,
     val reservations: List<ReservationItemResponse>,
@@ -13,4 +12,3 @@ data class ReservationItemResponse(
     val screeningId: Long,
     val seats: List<String>,
 )
-

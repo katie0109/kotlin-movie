@@ -21,4 +21,3 @@ class ScreeningSlot(
 
     fun hasSeat(seat: Seat): Boolean = screen.seats.hasSeat(seat)
 }
-

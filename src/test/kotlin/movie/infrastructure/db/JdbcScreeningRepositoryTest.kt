@@ -1,6 +1,5 @@
 package movie.infrastructure.db
 
-
 import movie.domain.seat.Seat
 import movie.domain.seat.SeatColumn
 import movie.domain.seat.SeatGrade
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.sql.Connection
-import java.time.LocalDate
 import java.time.LocalTime
 
 class JdbcScreeningRepositoryTest {
@@ -45,9 +43,10 @@ class JdbcScreeningRepositoryTest {
 
     @Test
     fun `존재하지 않는 ID로 조회하면 예외가 발생한다`() {
-        val exception = assertThrows<IllegalArgumentException> {
-            screeningRepository.findById(999L)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                screeningRepository.findById(999L)
+            }
         assertThat(exception.message).isEqualTo("상영 정보를 찾을 수 없습니다.")
     }
 

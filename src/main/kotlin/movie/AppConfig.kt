@@ -17,7 +17,6 @@ import java.sql.Connection
 
 @Configuration
 class AppConfig {
-
     @Bean
     fun connection(environment: Environment): Connection =
         if (environment.activeProfiles.contains("test")) {
@@ -27,38 +26,36 @@ class AppConfig {
         }
 
     @Bean
-    fun databaseInitializer(connection: Connection): DatabaseInitializer {
-        return DatabaseInitializer(connection).also { it.initialize() }
-    }
+    fun databaseInitializer(connection: Connection): DatabaseInitializer = DatabaseInitializer(connection).also { it.initialize() }
 
     @Bean
-    fun movieRepository(connection: Connection, screeningRepository: JdbcScreeningRepository): JdbcMovieRepository {
-        return JdbcMovieRepository(connection, screeningRepository)
-    }
+    fun movieRepository(
+        connection: Connection,
+        screeningRepository: JdbcScreeningRepository,
+    ): JdbcMovieRepository = JdbcMovieRepository(connection, screeningRepository)
 
     @Bean
-    fun reservedSeatRepository(connection: Connection): JdbcReservedSeatRepository {
-        return JdbcReservedSeatRepository(connection)
-    }
+    fun reservedSeatRepository(connection: Connection): JdbcReservedSeatRepository = JdbcReservedSeatRepository(connection)
 
     @Bean
-    fun screeningRepository(connection: Connection, reservedSeatRepository: JdbcReservedSeatRepository): JdbcScreeningRepository {
-        return JdbcScreeningRepository(connection, reservedSeatRepository)
-    }
+    fun screeningRepository(
+        connection: Connection,
+        reservedSeatRepository: JdbcReservedSeatRepository,
+    ): JdbcScreeningRepository = JdbcScreeningRepository(connection, reservedSeatRepository)
 
     @Bean
-    fun reservationRepository(connection: Connection, reservedSeatRepository: JdbcReservedSeatRepository): JdbcReservationRepository {
-        return JdbcReservationRepository(connection, reservedSeatRepository)
-    }
+    fun reservationRepository(
+        connection: Connection,
+        reservedSeatRepository: JdbcReservedSeatRepository,
+    ): JdbcReservationRepository = JdbcReservationRepository(connection, reservedSeatRepository)
 
     @Bean
-    fun priceCalculator(): PriceCalculator {
-        return PriceCalculator(
-            discountPolicies = DiscountPolicies(
-                listOf(MovieDayDiscount()),
-                listOf(TimeDiscount())
-            )
+    fun priceCalculator(): PriceCalculator =
+        PriceCalculator(
+            discountPolicies =
+                DiscountPolicies(
+                    listOf(MovieDayDiscount()),
+                    listOf(TimeDiscount()),
+                ),
         )
-    }
-
 }

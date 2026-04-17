@@ -1,6 +1,5 @@
 package movie.infrastructure.db
 
-
 import movie.domain.amount.Money
 import movie.domain.amount.Point
 import movie.domain.reservation.Reservations
@@ -13,7 +12,6 @@ class JdbcReservationRepository(
     private val connection: Connection,
     private val reservedSeatRepository: ReservedSeatRepository,
 ) : ReservationRepository {
-
     override fun save(
         reservations: Reservations,
         totalPrice: Money,
@@ -64,7 +62,10 @@ class JdbcReservationRepository(
         }
     }
 
-    private fun insertReservationItem(reservationId: Long, screeningId: Long): Long {
+    private fun insertReservationItem(
+        reservationId: Long,
+        screeningId: Long,
+    ): Long {
         val sql = "INSERT INTO reservation_item (reservation_id, screening_id) VALUES (?, ?)"
 
         connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS).use { stmt ->
@@ -79,7 +80,11 @@ class JdbcReservationRepository(
         }
     }
 
-    private fun insertReservationSeat(reservationItemId: Long, seatRow: String, seatColumn: Int) {
+    private fun insertReservationSeat(
+        reservationItemId: Long,
+        seatRow: String,
+        seatColumn: Int,
+    ) {
         val sql = "INSERT INTO reservation_seat (reservation_item_id, seat_row, seat_column) VALUES (?, ?, ?)"
 
         connection.prepareStatement(sql).use { stmt ->

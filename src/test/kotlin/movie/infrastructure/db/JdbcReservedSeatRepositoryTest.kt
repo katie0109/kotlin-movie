@@ -30,7 +30,6 @@ class JdbcReservedSeatRepositoryTest {
 
     @Test
     fun `상영에 예약된 좌석을 조회할 수 있다`() {
-
         val seats = repository.findAllByScreeningId(102L)
 
         assertThat(seats).hasSize(4)
@@ -44,7 +43,6 @@ class JdbcReservedSeatRepositoryTest {
 
     @Test
     fun `예약된 좌석이 없으면 빈 리스트를 반환한다`() {
-
         val seats = repository.findAllByScreeningId(101L)
 
         assertThat(seats).isEmpty()
@@ -52,10 +50,11 @@ class JdbcReservedSeatRepositoryTest {
 
     @Test
     fun `좌석을 저장할 수 있다`() {
-        val seatsToSave = listOf(
-            Seat(SeatRow("A"), SeatColumn(1), SeatGrade.B),
-            Seat(SeatRow("A"), SeatColumn(2), SeatGrade.B),
-        )
+        val seatsToSave =
+            listOf(
+                Seat(SeatRow("A"), SeatColumn(1), SeatGrade.B),
+                Seat(SeatRow("A"), SeatColumn(2), SeatGrade.B),
+            )
 
         repository.saveAll(101L, seatsToSave)
 
@@ -69,9 +68,10 @@ class JdbcReservedSeatRepositoryTest {
 
     @Test
     fun `이미 예약된 좌석을 다시 저장하면 예외가 발생한다`() {
-        val duplicateSeats = listOf(
-            Seat(SeatRow("B"), SeatColumn(2), SeatGrade.B),
-        )
+        val duplicateSeats =
+            listOf(
+                Seat(SeatRow("B"), SeatColumn(2), SeatGrade.B),
+            )
 
         assertThrows<Exception> {
             repository.saveAll(102L, duplicateSeats)

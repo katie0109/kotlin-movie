@@ -16,11 +16,11 @@ import movie.domain.seat.SeatGrade
 import movie.domain.seat.SeatRow
 import movie.domain.seat.Seats
 import movie.domain.seat.SelectedSeats
-import java.time.LocalDate
-import java.time.LocalTime
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
+import java.time.LocalTime
 
 class UserTest {
     @Test
@@ -60,14 +60,16 @@ class UserTest {
             Screening(
                 id = 101L,
                 movie = MovieTitle("토이 스토리"),
-                slot = ScreeningSlot(
-                    screen = Screen(ScreenId(1), Seats.createDefault()),
-                    screeningDateTime = ScreeningDateTime(
-                        LocalDate.of(2026, 1, 1),
-                        LocalTime.of(10, 0),
-                        LocalTime.of(12, 0),
+                slot =
+                    ScreeningSlot(
+                        screen = Screen(ScreenId(1), Seats.createDefault()),
+                        screeningDateTime =
+                            ScreeningDateTime(
+                                LocalDate.of(2026, 1, 1),
+                                LocalTime.of(10, 0),
+                                LocalTime.of(12, 0),
+                            ),
                     ),
-                ),
                 reservatedSeats = ReservatedSeats(emptyList()),
             )
         return Reservation(screening, selectedSeats)

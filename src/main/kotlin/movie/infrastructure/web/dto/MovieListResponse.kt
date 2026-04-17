@@ -5,7 +5,6 @@ import movie.domain.movie.Movies
 import movie.domain.screening.Screening
 import movie.domain.screening.Screenings
 
-
 data class MovieListResponse(
     val movies: List<MovieResponse>,
 ) {
@@ -49,4 +48,3 @@ data class ScreeningResponse(
             )
     }
 }
-

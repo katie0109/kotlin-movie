@@ -12,5 +12,4 @@ data class Movie(
     fun hasScreeningOnDate(date: LocalDate): Boolean = screenings.hasScreeningOnDate(date)
 
     fun getScreeningsByDate(date: LocalDate): Screenings = screenings.getScreeningsByDate(date)
-
 }

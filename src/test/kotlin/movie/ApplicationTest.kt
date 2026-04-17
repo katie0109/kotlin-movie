@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
-import org.springframework.http.MediaType
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.client.RestTestClient
 import java.sql.Connection
@@ -38,10 +38,13 @@ class ApplicationTest(
             .uri("/api/movies")
             .accept(MediaType.APPLICATION_JSON)
             .exchange()
-            .expectStatus().isOk()
-            .expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+            .expectStatus()
+            .isOk()
+            .expectHeader()
+            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
             .expectBody()
-            .jsonPath("$.movies").isArray()
+            .jsonPath("$.movies")
+            .isArray()
     }
 
     @Test
@@ -64,11 +67,15 @@ class ApplicationTest(
                 }
                 """.trimIndent(),
             ).exchange()
-            .expectStatus().isCreated()
-            .expectHeader().contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+            .expectStatus()
+            .isCreated()
+            .expectHeader()
+            .contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
             .expectBody()
-            .jsonPath("$.reservationId").exists()
-            .jsonPath("$.totalPrice").exists()
+            .jsonPath("$.reservationId")
+            .exists()
+            .jsonPath("$.totalPrice")
+            .exists()
     }
 
     @Test
@@ -91,7 +98,8 @@ class ApplicationTest(
                 }
                 """.trimIndent(),
             ).exchange()
-            .expectStatus().isBadRequest()
+            .expectStatus()
+            .isBadRequest()
     }
 
     @Test
@@ -114,7 +122,8 @@ class ApplicationTest(
                 }
                 """.trimIndent(),
             ).exchange()
-            .expectStatus().isBadRequest()
+            .expectStatus()
+            .isBadRequest()
     }
 
     @Test
@@ -130,7 +139,8 @@ class ApplicationTest(
                 }
                 """.trimIndent(),
             ).exchange()
-            .expectStatus().isBadRequest()
+            .expectStatus()
+            .isBadRequest()
     }
 
     @Test
@@ -157,7 +167,8 @@ class ApplicationTest(
                 }
                 """.trimIndent(),
             ).exchange()
-            .expectStatus().isEqualTo(HttpStatus.CONFLICT)
+            .expectStatus()
+            .isEqualTo(HttpStatus.CONFLICT)
     }
 
     private fun resetReservationData() {
@@ -174,4 +185,3 @@ class ApplicationTest(
         }
     }
 }
-

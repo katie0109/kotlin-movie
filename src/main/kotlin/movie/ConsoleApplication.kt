@@ -17,9 +17,10 @@ fun main() {
     val movieRepository = JdbcMovieRepository(connection, screeningRepository)
     val reservationRepository = JdbcReservationRepository(connection, reservedSeatRepository)
 
-    val controller = MovieController(
-        movieRepository = movieRepository,
-        reservationRepository = reservationRepository,
-    )
+    val controller =
+        MovieController(
+            movieRepository = movieRepository,
+            reservationRepository = reservationRepository,
+        )
     controller.run()
 }

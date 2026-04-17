@@ -11,8 +11,7 @@ class Reservation(
     private val screening: Screening,
     private val selectedSeats: SelectedSeats,
 ) {
-    fun isTimeOverlapping(other: Reservation): Boolean =
-        screening.isTimeOverlapping(other.screening)
+    fun isTimeOverlapping(other: Reservation): Boolean = screening.isTimeOverlapping(other.screening)
 
     fun screeningId(): Long = screening.id
 

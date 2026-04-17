@@ -14,4 +14,3 @@ class MovieApiController(
     @GetMapping
     fun getMovies(): MovieListResponse = MovieListResponse.from(movieRepository.findAll())
 }
-

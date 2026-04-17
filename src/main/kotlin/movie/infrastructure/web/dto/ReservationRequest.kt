@@ -1,6 +1,5 @@
 package movie.infrastructure.web.dto
 
-
 data class ReservationRequest(
     val reservations: List<ReservationItemRequest>,
     val usedPoints: Int,

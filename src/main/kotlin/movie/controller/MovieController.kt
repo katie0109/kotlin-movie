@@ -108,7 +108,10 @@ class MovieController(
         return reservations
     }
 
-    private fun addReservation(movies: Movies, existingReservations: Reservations): Reservations =
+    private fun addReservation(
+        movies: Movies,
+        existingReservations: Reservations,
+    ): Reservations =
         executeWithRetry {
             val reservation = selectMovieAndSeats(movies)
             val updatedReservations = existingReservations.add(reservation)
