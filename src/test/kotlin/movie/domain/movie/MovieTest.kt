@@ -39,7 +39,7 @@ class MovieTest {
             )
 
         // when
-        val movie = Movie(id, MovieTitle("F1 더 무비"), screenings)
+        val movie = Movie(id, MovieTitle("F1 더 무비"), screenings, runningTimeMinutes = 160)
 
         // then
         assertThat(id).isEqualTo(id)
