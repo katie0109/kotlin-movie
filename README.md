@@ -29,10 +29,10 @@
 - [x] JdbcMovieRepository.kt SELECT에 running_time_minutes 추가
 - [x] PaymentMethod.kt에 from(String) 오버로드 추가
 - [x] AppConfig.kt — Connection, Repository, PriceCalculator를 Spring Bean으로 등록
-- [ ] MovieListResponse DTO 정의
-- [ ] ReservationRequest DTO 정의
-- [ ] ReservationResponse DTO 정의
-- [ ] ErrorResponse DTO 정의
+- [x] MovieListResponse DTO 정의_
+- [x] ReservationRequest DTO 정의
+- [x] ReservationResponse DTO 정의
+- [x] ErrorResponse DTO 정의
 - [ ] MovieApiController 구현 - GET /api/movies
 - [ ] ReservationApiController 구현 - GET /api/screenings
 - [ ] GlobalExceptionHandler 구현 — 에러 → HTTP 상태코드 매핑
