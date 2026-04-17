@@ -12,15 +12,19 @@ import movie.infrastructure.db.JdbcReservedSeatRepository
 import movie.infrastructure.db.JdbcScreeningRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.Environment
 import java.sql.Connection
 
 @Configuration
 class AppConfig {
 
     @Bean
-    fun connection(): Connection {
-        return DatabaseConnector.connectLocal()
-    }
+    fun connection(environment: Environment): Connection =
+        if (environment.activeProfiles.contains("test")) {
+            DatabaseConnector.connectTest()
+        } else {
+            DatabaseConnector.connectLocal()
+        }
 
     @Bean
     fun databaseInitializer(connection: Connection): DatabaseInitializer {

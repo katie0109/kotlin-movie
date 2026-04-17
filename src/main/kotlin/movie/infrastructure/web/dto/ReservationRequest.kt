@@ -2,11 +2,12 @@ package movie.infrastructure.web.dto
 
 
 data class ReservationRequest(
-    val screeningId: Long,
-    val selectedSeats: List<SelectedSeatRequest>,
+    val reservations: List<ReservationItemRequest>,
+    val usedPoints: Int,
+    val paymentMethod: String,
 )
 
-data class SelectedSeatRequest(
-    val seatRow: String,
-    val seatColumn: Int,
+data class ReservationItemRequest(
+    val screeningId: Long,
+    val seats: List<String>,
 )
