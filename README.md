@@ -33,13 +33,13 @@
 - [x] ReservationRequest DTO 정의
 - [x] ReservationResponse DTO 정의
 - [x] ErrorResponse DTO 정의
-- [ ] MovieApiController 구현 - GET /api/movies
-- [ ] ReservationApiController 구현 - GET /api/screenings
+- [x] MovieApiController 구현 - GET /api/movies
+- [ ] ReservationApiController 구현 - GET /api/reservation
 - [ ] GlobalExceptionHandler 구현 — 에러 → HTTP 상태코드 매핑
 
 ### 테스트
-- [ ] 영화 목록 조회 시 200 OK 반환 테스트
-- [ ] 영화 목록 응답에 영화와 상영 정보가 포함되는 테스트
+- [x] 영화 목록 조회 시 200 OK 반환 테스트
+- [x] 영화 목록 응답에 영화와 상영 정보가 포함되는 테스트
 - [ ] 예매 생성 시 201 Created 반환 테스트
 - [ ] 예매 응답에 reservationId와 totalPrice가 포함되는 테스트
 - [ ] 이미 예약된 좌석 예매 시 오류 응답 반환 테스트

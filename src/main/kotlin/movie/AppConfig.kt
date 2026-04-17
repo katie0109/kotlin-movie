@@ -1,7 +1,6 @@
 package movie
 
 import movie.domain.discount.DiscountPolicies
-import movie.domain.discount.DiscountPolicy
 import movie.domain.discount.MovieDayDiscount
 import movie.domain.discount.TimeDiscount
 import movie.domain.payment.PriceCalculator
@@ -12,9 +11,11 @@ import movie.infrastructure.db.JdbcReservationRepository
 import movie.infrastructure.db.JdbcReservedSeatRepository
 import movie.infrastructure.db.JdbcScreeningRepository
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import java.sql.Connection
 
-class AppConfig{
+@Configuration
+class AppConfig {
 
     @Bean
     fun connection(): Connection {
@@ -23,7 +24,7 @@ class AppConfig{
 
     @Bean
     fun databaseInitializer(connection: Connection): DatabaseInitializer {
-        return DatabaseInitializer(connection)
+        return DatabaseInitializer(connection).also { it.initialize() }
     }
 
     @Bean
